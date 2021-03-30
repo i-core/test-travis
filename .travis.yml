@@ -1,0 +1,22 @@
+language: python
+
+python:
+  - "3.6"
+
+script: 
+  - python hello.py
+
+script:
+  - |
+    set -e
+    tar -cvzf test.tar.gz hello.py
+
+deploy:
+  - provider: releases
+    token:
+      secure: N2TI+vE8Ye6V8ILD4nxpP1RNeXSCx6rRnj/FaQBoUs8aO4yJepgsJ6toouSx44/8mHaZ/exSEk7rZKVP/XzNFUNzx4p/6H8hBsXQ9uKSe8a25zcP8Gm94RQgPVE1kbbst3kqh7CwEIOu1HY9eZrlig0MwTjmjhOkLZCXugENIDO25Y19MweabnwPd3zwFDzrvELkV+ORz32v+TpEau1bArbhAPa96nwl4k/6+AjLPeNk/tX61mbfmYOdZCa2uLyOFmr4RipzyvCwD4JZTaMJj/prylDHOTopmQdmwMDrNdQLDHgp8xEBMUrdHD6Fm2Quas3dkNkrMRAYve9WnaBfLuFqBvxz7TQm9KQvV/U7rmKvOIXwrnSf6dUlu087COIhSMlvPjcdFjBLYfMBZKCah0Ay+kBoDc2vzGNh4/faFuhUH/m380CMz2gMVyR3Hwd+wg+49ceL/TYlYVcFqmGe9OFAPxJNavZbp6/cpNMKfHgQeZLv+v2Gh25L2AgrOZnu0eqHfgAcUorZTiM66+P8zGBiDC/0Xzw054biYiUOy6kfyG2/0SO+XkiaiPHechrHWgXdNhVJ4BmIauaBmQHLtDc0VxlbGzWuzwUFlNXo5xBPXFLEwqcvPZqdKr0joan5dmQc+mmegkT79E2erqW6Yji8RrrREHT7x4nu5AZAKcU=
+    file:
+      - test.tar.gz
+    on:
+      tags: true
+      condition: $TRAVIS_OS_NAME = linux
